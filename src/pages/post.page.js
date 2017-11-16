@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DefaultLayout from '../layouts/default.layout';
-import Nav from '../organisms/Nav';
-import ElementWithHeader from '../cells/ElementWithHeader';
-import ListWithStat from '../cells/ListWithStat';
-import Post from '../cells/Post';
-import Comment from '../cells/Comment';
+import { Comment, Divider } from 'semantic-ui-react';
+import BasePage from './base.page';
+import Post from '../components/PostComponent';
 
-export default class PostPage extends Component {
+export default class HomePage extends Component {
   static propTypes = {
     categories: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -35,14 +32,13 @@ export default class PostPage extends Component {
         deleted: PropTypes.bool.isRequired,
         numComments: PropTypes.number.isRequired,
       })).isRequired,
-
     onPostUpvote: PropTypes.func.isRequired,
     onPostDownvote: PropTypes.func.isRequired,
     onCommentUpvote: PropTypes.func.isRequired,
     onCommentDownvote: PropTypes.func.isRequired,
   }
 
-  static defaultProps ={
+  static defaultProps = { 
     categories: [],
     comments: [],
   }
@@ -58,28 +54,27 @@ export default class PostPage extends Component {
       onCommentDownvote,
     } = this.props;
 
-    const nav = <Nav categories={categories}/>;
+    return (
+      <BasePage categories={categories}>
+        <Post 
+          key={post.id}
+          id={post.id}
+          timestamp={post.timestamp}
+          title={post.title}
+          body={post.body} 
+          author={post.author}
+          voteScore={post.voteScore}
+          category={post.category}
+          deleted={post.deleted}
+          numComments={post.numComments}
+          onUpvote={onPostUpvote}
+          onDownvote={onPostDownvote}
+        />
+        
+        <Divider horizontal>Comments</Divider>
 
-    const body =
-      <section> 
-        <article>
-          <Post 
-            id={post.id}
-            timestamp={post.timestamp}
-            title={post.title}
-            body={post.body} 
-            author={post.author}
-            voteScore={post.voteScore}
-            category={post.category}
-            deleted={post.deleted}
-            numComments={post.numComments}
-            onUpvote={onPostUpvote}
-            onDownvote={onPostDownvote}
-          />
-        </article>
-        <aside className='ui items'>
-          <h3 className="ui dividing header">Comments</h3>
-          {comments.map((comment) => (
+        <Comment.Group>
+          {comments.map(comment => {
             <Comment 
               key={comment.id}
               id={comment.id}
@@ -94,29 +89,9 @@ export default class PostPage extends Component {
               onUpvote={onCommentUpvote}
               onDownvote={onCommentDownvote}
             />
-          ))}
-        </aside>
-      </section>;
-
-    const categoryListWithPostCount = <ListWithStat className="ui list"
-      items={categories} 
-      itemClassNames='ui label'
-      itemKeyPropertyName={'name'}
-      itemDisplayNamePropertyName={'name'}
-      itemStatPropertyName={'numPosts'}
-      />
-    const footer1 = <ElementWithHeader headerText='Top Categories' element={categoryListWithPostCount}/>;
-    const footer2 = <ElementWithHeader headerText='Top Posts' element={null}/>;
-    const footer3 = <ElementWithHeader headerText='About' element={null}/>;
-
-    return (
-      <DefaultLayout 
-        nav={nav}
-        body={body}
-        footer1={footer1}
-        footer2={footer2}
-        footer3={footer3}
-      />
+          })};
+        </Comment.Group>
+      </BasePage>
     )
   }
 }

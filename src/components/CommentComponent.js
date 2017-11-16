@@ -1,0 +1,73 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Comment, Label, Button, Icon } from 'semantic-ui-react';
+import { distanceInWordsToNow } from 'date-fns';
+
+const CommentComponent = ({
+  id,
+  parentId,
+  timestamp,
+  body,
+  author,
+  voteScore,	
+  deleted,
+  parentDeleted,
+  onUpvote,
+  onDownvote,
+}) => (
+  <Comment>
+    <Comment.Avatar size='tiny'>
+      <Button.Group vertical floated='right' size='mini'>
+        <Button compact positive circular onClick={() => onUpvote(id)}>
+          <Button.Content>
+            <Icon fitted name='thumbs up'/>
+          </Button.Content>
+        </Button>
+        <Button compact basic>
+          <Button.Content>
+            {voteScore}
+          </Button.Content>
+        </Button>
+        <Button compact negative circular onClick={() => onDownvote(id)}>
+          <Button.Content>
+            <Icon fitted name='thumbs down'/>
+          </Button.Content>
+        </Button>
+      </Button.Group>
+    </Comment.Avatar>
+    <Comment.Content>
+      <Comment.Author>
+        {author}
+      </Comment.Author>
+      <Comment.Metadata>
+        {distanceInWordsToNow(timestamp, {includeSeconds: true})} ago
+      </Comment.Metadata>
+      <Comment.Text>
+        {body}
+      </Comment.Text>
+    </Comment.Content>
+  </Comment>
+
+);
+
+CommentComponent.propTypes = {
+  id: PropTypes.string.isRequired,
+  parentId: PropTypes.string.isRequired,
+  timestamp: PropTypes.number.isRequired,
+  body: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  voteScore: PropTypes.number,
+  deleted: PropTypes.bool,
+  parentDeleted: PropTypes.bool,
+  onUpvote: PropTypes.func.isRequired,
+  onDownvote: PropTypes.func.isRequired,
+}
+
+CommentComponent.defaultProps = {
+  voteScore: 0,
+  deleted: false,
+  parentDeleted: false,
+}
+
+export default CommentComponent;

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import PostPage from '../components/pages/post.page';
+import PostPage from '../pages/post.page';
 import Actions from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
