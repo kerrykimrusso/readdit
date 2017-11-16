@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Item } from 'semantic-ui-react';
 import BasePage from './base.page';
-import Post from '../components/PostComponent';
+import Post from '../components/post.component';
 
 export default class HomePage extends Component {
   static propTypes = {
