@@ -5,7 +5,7 @@ import BasePage from './base.page';
 import Post from '../components/post.component';
 import CommentComp from '../components/comment.component';
 
-export default class HomePage extends Component {
+export default class PostPage extends Component {
   static propTypes = {
     categories: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
