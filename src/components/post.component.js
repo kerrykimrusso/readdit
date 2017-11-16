@@ -20,19 +20,19 @@ const PostComponent = ({
   <Item>
     <Item.Image size='tiny'>
       <Button.Group vertical floated='right' size='mini'>
-        <Button compact positive circular onClick={() => onUpvote(id)}>
+        <Button basic compact onClick={() => onUpvote(id)}>
           <Button.Content>
-            <Icon fitted name='thumbs up'/>
+            <Icon fitted name='thumbs up' color='olive' size='large'/>
           </Button.Content>
         </Button>
-        <Button compact basic>
+        <Button compact basic className="voteScore">
           <Button.Content>
             {voteScore}
           </Button.Content>
         </Button>
-        <Button compact negative circular onClick={() => onDownvote(id)}>
+        <Button basic compact onClick={() => onDownvote(id)}>
           <Button.Content>
-            <Icon fitted name='thumbs down'/>
+            <Icon fitted name='thumbs down' size='large'/>
           </Button.Content>
         </Button>
       </Button.Group>
@@ -45,11 +45,11 @@ const PostComponent = ({
         <span>Submitted {distanceInWordsToNow(timestamp, {includeSeconds: true})} ago by {author} to <Link to={`/${category}`}>{category}</Link></span>
       </Item.Meta>
       <Item.Extra>
-        <Label>
-          <Link to={`/post/${id}`}>
-            <i className="comment icon"></i> {numComments}
-          </Link>
-        </Label>
+        <Link to={`/post/${id}`}>
+          <Label>
+            <Icon fitted name='comment'/>{numComments}
+          </Label>
+        </Link>
       </Item.Extra>
     </Item.Content>
   </Item>
@@ -66,6 +66,7 @@ PostComponent.propTypes = {
   category: PropTypes.string.isRequired,
   deleted: PropTypes.bool.isRequired,
   numComments: PropTypes.number,
+  commentsHidden: PropTypes.bool,
   onUpvote: PropTypes.func.isRequired,
   onDownvote: PropTypes.func.isRequired,
 }
