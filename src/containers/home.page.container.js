@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
 
   const filterBy = lens => propValue => R.filter(x => R.view(lens, x) === propValue);
-  const sortPostsByPropDesc = propName => R.sortBy(R.descend(R.prop(propName)));
+  const sortPostsByPropDesc = propName => R.sort(R.descend(R.prop(propName)));
   const filterByCategoryThenSortByVoteScore = propValue => R.pipe(
     filterBy(R.lensProp('category'))(propValue),
     sortPostsByPropDesc('voteScore'),
@@ -24,7 +24,6 @@ const mapStateToProps = (state, ownProps) => {
   );
 
   const commentParentIdLens = R.lensProp('parentId');
-  
   const numCommentsByPostId = countByProp(commentParentIdLens)(comments);
   
   const setNumCommentsForPosts = R.map(
