@@ -23,15 +23,14 @@ export default class PostPage extends Component {
         numComments: PropTypes.number.isRequired,
       }).isRequired,
     comments: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired, 
+        id: PropTypes.string.isRequired,
+        parentId: PropTypes.string.isRequired,
         timestamp: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired, 
         body: PropTypes.string.isRequired,
         author: PropTypes.string.isRequired,
-        voteScore: PropTypes.number.isRequired,
-        category: PropTypes.string.isRequired,
-        deleted: PropTypes.bool.isRequired,
-        numComments: PropTypes.number.isRequired,
+        voteScore: PropTypes.number,
+        deleted: PropTypes.bool,
+        parentDeleted: PropTypes.bool,
       })).isRequired,
     onPostUpvote: PropTypes.func.isRequired,
     onPostDownvote: PropTypes.func.isRequired,
@@ -72,25 +71,25 @@ export default class PostPage extends Component {
           onDownvote={onPostDownvote}
         />
         
-        <Divider horizontal>Comments</Divider>
+        <Divider horizontal>Comments ({post.numComments})</Divider>
 
         <Comment.Group>
-          {comments.map(comment => {
-            <Comment 
+          {comments.map(comment => (
+            <CommentComp 
               key={comment.id}
               id={comment.id}
+              parentId={comment.parentId}
               timestamp={comment.timestamp}
-              title={comment.title}
               body={comment.body} 
               author={comment.author}
               voteScore={comment.voteScore}
-              category={comment.category}
               deleted={comment.deleted}
+              parentDeleted={comment.parentDeleted}
               numComments={comment.numComments}
               onUpvote={onCommentUpvote}
               onDownvote={onCommentDownvote}
             />
-          })};
+          ))};
         </Comment.Group>
       </BasePage>
     )
