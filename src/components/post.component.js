@@ -14,6 +14,7 @@ const PostComponent = ({
   category,
   deleted,
   numComments,
+  commentsHidden,
   onUpvote,
   onDownvote,
 }) => (
@@ -44,13 +45,13 @@ const PostComponent = ({
       <Item.Meta>
         <span>Submitted {distanceInWordsToNow(timestamp, {includeSeconds: true})} ago by {author} to <Link to={`/${category}`}>{category}</Link></span>
       </Item.Meta>
-      <Item.Extra>
+      {!commentsHidden && <Item.Extra>
         <Link to={`/post/${id}`}>
           <Label>
             <Icon fitted name='comment'/>{numComments}
           </Label>
         </Link>
-      </Item.Extra>
+      </Item.Extra>}
     </Item.Content>
   </Item>
 
@@ -73,6 +74,7 @@ PostComponent.propTypes = {
 
 PostComponent.defaultProps = {
   numComments: 0,
+  commentsHidden: false,
 }
 
 export default PostComponent;

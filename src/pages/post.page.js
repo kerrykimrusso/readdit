@@ -69,6 +69,7 @@ export default class PostPage extends Component {
           numComments={post.numComments}
           onUpvote={onPostUpvote}
           onDownvote={onPostDownvote}
+          commentsHidden
         />
         
         <Divider horizontal>Comments ({post.numComments})</Divider>
@@ -89,7 +90,7 @@ export default class PostPage extends Component {
               onUpvote={onCommentUpvote}
               onDownvote={onCommentDownvote}
             />
-          ))};
+          ))}
         </Comment.Group>
       </BasePage>
     )
