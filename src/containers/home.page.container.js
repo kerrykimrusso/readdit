@@ -5,7 +5,7 @@ import * as R from 'ramda';
 
 const mapStateToProps = (state, ownProps) => {
   const { categories, posts, comments } = state;
-  const { id } = ownProps.match.params;
+  const { category } = ownProps.match.params;
 
   const filterBy = lens => propValue => R.filter(x => R.view(lens, x) === propValue);
   const sortPostsByPropDesc = propName => R.sort(R.descend(R.prop(propName)));
@@ -14,9 +14,9 @@ const mapStateToProps = (state, ownProps) => {
     sortPostsByPropDesc('voteScore'),
   );
 
-  const postsToDisplay = R.isNil(id) ? 
+  const postsToDisplay = R.isNil(category) ? 
     sortPostsByPropDesc('voteScore')(posts) :
-    filterByCategoryThenSortByVoteScore(id)(posts);
+    filterByCategoryThenSortByVoteScore(category)(posts);
 
   const countByProp = lens => R.pipe(
     R.map(R.view(lens)),

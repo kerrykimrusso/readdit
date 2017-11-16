@@ -16,7 +16,7 @@ export const App = () => (
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path="/category/:id" component={HomePageContainer}/>
+        <Route exact path="/:category" component={HomePageContainer}/>
         {/* <Route exact path="/post/:id" component={PostPageContainer}/>
         <Route exact path="/category/post/:id" render={}/>
         <Route path="/post" render={}/>

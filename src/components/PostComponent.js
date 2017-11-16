@@ -39,10 +39,10 @@ const PostComponent = ({
     </Item.Image>
     <Item.Content>
       <Item.Header>
-        <Link to={`post/${id}`}>{title}</Link>
+        <Link to={`${category}/${id}`}>{title}</Link>
       </Item.Header>
       <Item.Meta>
-        <span>Submitted {distanceInWordsToNow(timestamp, {includeSeconds: true})} ago by {author} to <Link to={`category/${category}`}>{category}</Link></span>
+        <span>Submitted {distanceInWordsToNow(timestamp, {includeSeconds: true})} ago by {author} to <Link to={`/${category}`}>{category}</Link></span>
       </Item.Meta>
       <Item.Extra>
         <Label>

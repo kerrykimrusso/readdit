@@ -15,7 +15,7 @@ const Nav = ({
       <Dropdown item text='Categories'>
         <Dropdown.Menu>
           {categories.map(cat => (
-            <NavLink key={cat.name} to={`/category/${cat.path}`}>
+            <NavLink key={cat.name} to={`/${cat.path}`}>
               <Dropdown.Item>
                 {cat.name}
               </Dropdown.Item>
