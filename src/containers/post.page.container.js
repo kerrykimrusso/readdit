@@ -3,17 +3,22 @@ import PostPage from '../pages/post.page';
 import Actions from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
-  const { id: selectedPostId } = ownProps.match.params;
+  const { categories, posts, comments } = state;
+  const { id: postId } = ownProps.match.params;
   
-  const comments = [];
-  state.comments.forEach((comment) => {
-    if(comment.parentId === selectedPostId) {
-      comments.push(comment);
+  const curPostComments = [];
+  comments.forEach((comment) => {
+    if(comment.parentId === postId) {
+      curPostComments.push(comment);
     }
   });
 
+  const curPost = posts.find(post => post.id === postId);
+  curPost.numComments = curPostComments.length;
+
   return {
-    post: state.posts.find((post) => post.id === selectedPostId),
+    categories,
+    post: curPost,
     comments
   };
 };
