@@ -14,14 +14,13 @@ const PostComponent = ({
   category,
   deleted,
   numComments,
-
   onUpvote,
   onDownvote,
 }) => (
   <Item>
     <Item.Image size='tiny'>
       <Button.Group vertical floated='right' size='mini'>
-        <Button compact positive circular>
+        <Button compact positive circular onClick={() => onUpvote(id)}>
           <Button.Content>
             <Icon fitted name='thumbs up'/>
           </Button.Content>
@@ -31,7 +30,7 @@ const PostComponent = ({
             {voteScore}
           </Button.Content>
         </Button>
-        <Button compact negative circular>
+        <Button compact negative circular onClick={() => onDownvote(id)}>
           <Button.Content>
             <Icon fitted name='thumbs down'/>
           </Button.Content>

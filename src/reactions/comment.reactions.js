@@ -43,7 +43,7 @@ const CommentReactions = {
       return Object.assign(
         {}, 
         comment, 
-        {voteScore: comment.voteScore + 1}
+        {voteScore: comment.voteScore - 1}
       );
     });
   },
