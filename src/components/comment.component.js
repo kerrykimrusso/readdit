@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Comment, Label, Button, Icon } from 'semantic-ui-react';
+import { Comment, Button, Icon } from 'semantic-ui-react';
 import { distanceInWordsToNow } from 'date-fns';
 
 const CommentComponent = ({
