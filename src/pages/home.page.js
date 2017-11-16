@@ -41,7 +41,7 @@ export default class HomePage extends Component {
     return (
       <BasePage categories={categories}>
         <Item.Group>
-        {posts.map((post) => (
+        {posts.map(post => (
           <Post 
             key={post.id}
             id={post.id}
