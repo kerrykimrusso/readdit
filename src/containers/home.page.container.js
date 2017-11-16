@@ -1,41 +1,26 @@
 import { connect } from 'react-redux';
 import HomePage from '../pages/home.page';
 import Actions from '../actions';
-import * as R from 'ramda';
+import { 
+  filterByCategoryThenSortByVoteScore, 
+  sortPostsByVoteScore, 
+  countCommentsPerPostId, 
+  setNumCommentsForPosts 
+} from '../utils';
 
 const mapStateToProps = (state, ownProps) => {
   const { categories, posts, comments } = state;
   const { category } = ownProps.match.params;
 
-  const filterBy = lens => propValue => R.filter(x => R.view(lens, x) === propValue);
-  const sortPostsByPropDesc = propName => R.sort(R.descend(R.prop(propName)));
-  const filterByCategoryThenSortByVoteScore = propValue => R.pipe(
-    filterBy(R.lensProp('category'))(propValue),
-    sortPostsByPropDesc('voteScore'),
-  );
-
-  const postsToDisplay = R.isNil(category) ? 
-    sortPostsByPropDesc('voteScore')(posts) :
-    filterByCategoryThenSortByVoteScore(category)(posts);
-
-  const countByProp = lens => R.pipe(
-    R.map(R.view(lens)),
-    R.countBy(R.identity),
-  );
-
-  const commentParentIdLens = R.lensProp('parentId');
-  const numCommentsByPostId = countByProp(commentParentIdLens)(comments);
+  const filteredPosts = category ? 
+    filterByCategoryThenSortByVoteScore(category)(posts) : 
+    sortPostsByVoteScore(posts);
   
-  const setNumCommentsForPosts = R.map(
-    x => R.ifElse(y => y.id in numCommentsByPostId,
-      R.set(R.lensProp('numComments'), numCommentsByPostId[x.id]),
-      R.identity
-    )(x)
-  );
-
+  const numCommentsPerPostId = countCommentsPerPostId(comments);
+  
   return {
     categories,
-    posts: setNumCommentsForPosts(postsToDisplay),
+    posts: setNumCommentsForPosts(numCommentsPerPostId)(filteredPosts),
   };
 };
 
