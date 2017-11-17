@@ -25,13 +25,9 @@ const Nav = ({
       </Dropdown>
       <Menu.Menu position='right'>
         <Menu.Item>
-          <Button color='blue'>
-            <NavLink to={'/posts/new'}>
-              <Button.Content>
-                <Icon name='write'/> New Post
-              </Button.Content>
-            </NavLink>
-          </Button>
+          <NavLink to={'/posts/new'}>
+            <Button content='New Post' labelPosition='left' icon='write' primary/>
+          </NavLink>
         </Menu.Item>
       </Menu.Menu>
     </Menu>
