@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Divider } from 'semantic-ui-react';
+import { Item, Divider } from 'semantic-ui-react';
 import BasePage from './base.page';
 import Post from '../components/post.component';
 import CommentsGroup from '../components/commentsGroup.component';
@@ -57,21 +57,23 @@ export default class PostPage extends Component {
 
     return (
       <BasePage categories={categories}>
-        <Post 
-          key={post.id}
-          id={post.id}
-          timestamp={post.timestamp}
-          title={post.title}
-          body={post.body} 
-          author={post.author}
-          voteScore={post.voteScore}
-          category={post.category}
-          deleted={post.deleted}
-          numComments={post.numComments}
-          onUpvote={onPostUpvote}
-          onDownvote={onPostDownvote}
-          commentsHidden
-        />
+        <Item.Group>
+          <Post 
+            key={post.id}
+            id={post.id}
+            timestamp={post.timestamp}
+            title={post.title}
+            body={post.body} 
+            author={post.author}
+            voteScore={post.voteScore}
+            category={post.category}
+            deleted={post.deleted}
+            numComments={post.numComments}
+            onUpvote={onPostUpvote}
+            onDownvote={onPostDownvote}
+            commentsHidden
+          />
+        </Item.Group>
         
         <Divider horizontal>Comments ({post.numComments})</Divider>
 
