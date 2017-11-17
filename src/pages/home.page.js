@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Item } from 'semantic-ui-react';
 import BasePage from './base.page';
 import Post from '../components/post.component';
+import Dropdown from '../components/dropdownInline.component';
 
 export default class HomePage extends Component {
   static propTypes = {
@@ -21,6 +22,7 @@ export default class HomePage extends Component {
         deleted: PropTypes.bool.isRequired,
         numComments: PropTypes.number,
       })).isRequired,
+    sortMethods: PropTypes.array,
     onPostUpvote: PropTypes.func.isRequired,
     onPostDownvote: PropTypes.func.isRequired,
   }
@@ -28,18 +30,34 @@ export default class HomePage extends Component {
   static defaultProps = {
     categories: [],
     posts: [],
+    sortMethods: [
+      {
+        key: 'votes',
+        text: 'Votes',
+        value: 'votes',
+        content: 'Votes',
+      },
+      {
+        key: 'date',
+        text: 'Date',
+        value: 'date',
+        content: 'Date',
+      },
+    ]
   }
 
   render() {
     const { 
       categories,
       posts,
+      sortMethods,
       onPostUpvote,
       onPostDownvote,
     } = this.props;
 
     return (
       <BasePage categories={categories}>
+        <Dropdown pretext='Sort By' options={sortMethods}/>
         <Item.Group>
         {posts.map(post => (
           <Post 
