@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Item, Label, Button, Icon } from 'semantic-ui-react';
-import { distanceInWordsToNow } from 'date-fns';
+import { printDateOfPost } from '../utils';
 
 const PostComponent = ({
   id, 
@@ -44,7 +44,7 @@ const PostComponent = ({
         <Link to={`${category}/${id}`}>{title}</Link>
       </Item.Header>
       <Item.Meta>
-        <span>Submitted {distanceInWordsToNow(timestamp, {includeSeconds: true})} ago by {author} to <Link to={`/${category}`}>{category}</Link></span>
+        <span>Submitted {printDateOfPost(timestamp, 6)} by {author} to <Link to={`/${category}`}>{category}</Link></span>
       </Item.Meta>
       {!bodyHidden && 
         <Item.Description>

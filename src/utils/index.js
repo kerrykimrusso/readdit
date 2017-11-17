@@ -1,4 +1,5 @@
 import * as R from 'ramda';
+import { distanceInWordsToNow, differenceInMonths, format } from 'date-fns';
 
 export const filterByPropEqualTo = R.curry(
     (lens, value) => R.filter(
@@ -28,3 +29,9 @@ export const setNumCommentsForPosts = commentsCount => R.map(
     R.identity
   )(post)
 );
+
+export const printDateOfPost = (timestamp, relativeMax) => {
+  return differenceInMonths(Date.now(), timestamp) > relativeMax ? 
+  format(timestamp, 'MMM D, YYYY') :
+  `${distanceInWordsToNow(timestamp, {includeSeconds: true})} ago`
+}

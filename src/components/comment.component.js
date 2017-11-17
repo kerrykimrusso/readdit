@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Comment, Button, Icon } from 'semantic-ui-react';
-import { distanceInWordsToNow } from 'date-fns';
+import { printDateOfPost } from '../utils';
 
 const CommentComponent = ({
   id,
@@ -37,15 +37,20 @@ const CommentComponent = ({
       </Button.Group>
     </Comment.Avatar>
     <Comment.Content>
-      <Comment.Author>
+      <Comment.Author as='span'>
         {author}
       </Comment.Author>
       <Comment.Metadata>
-        {distanceInWordsToNow(timestamp, {includeSeconds: true})} ago
+        <div>{printDateOfPost(timestamp, 6)}</div>
       </Comment.Metadata>
       <Comment.Text>
         {body}
       </Comment.Text>
+      <Comment.Actions>
+        <Comment.Action>Reply</Comment.Action>
+        <Comment.Action>Edit</Comment.Action>
+        <Comment.Action>Delete</Comment.Action>
+      </Comment.Actions>
     </Comment.Content>
     {children}
   </Comment>
