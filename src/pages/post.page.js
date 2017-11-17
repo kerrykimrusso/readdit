@@ -75,7 +75,7 @@ export default class PostPage extends Component {
           />
         </Item.Group>
         
-        <Divider horizontal>Comments ({post.numComments})</Divider>
+        <Divider horizontal>Comments ({comments.length})</Divider>
 
         <Form reply>
           <Form.TextArea />

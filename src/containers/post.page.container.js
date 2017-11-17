@@ -14,13 +14,12 @@ const mapStateToProps = (state, ownProps) => {
     (node, parent) => parent.children.push(node),
     node => Object.assign({}, node, { children: [] }),
   );
-  const postComments = commentTree.filter(comment => comment.parentId === postId);
-  post.numComments = postComments.length;
+  const commentsForPost = commentTree.filter(comment => comment.parentId === postId);
 
   return {
     categories,
     post,
-    comments: postComments
+    comments: commentsForPost
   };
 };
 
