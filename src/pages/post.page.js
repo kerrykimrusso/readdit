@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Item, Divider } from 'semantic-ui-react';
+import { Form, Button, Item, Divider } from 'semantic-ui-react';
 import BasePage from './base.page';
 import Post from '../components/post.component';
 import CommentsGroup from '../components/commentsGroup.component';
@@ -71,11 +71,16 @@ export default class PostPage extends Component {
             numComments={post.numComments}
             onUpvote={onPostUpvote}
             onDownvote={onPostDownvote}
-            commentsHidden
+            isDetailView
           />
         </Item.Group>
         
         <Divider horizontal>Comments ({post.numComments})</Divider>
+
+        <Form reply>
+          <Form.TextArea />
+          <Button content='Add Comment' labelPosition='left' icon='edit' primary />
+        </Form>
 
         <CommentsGroup children={comments} onUpvote={onCommentUpvote} onDownvote={onCommentDownvote}/>
       </BasePage>
