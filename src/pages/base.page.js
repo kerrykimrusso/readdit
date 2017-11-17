@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
+import { Menu, Dropdown, Button } from 'semantic-ui-react';
 
 const Nav = ({
   categories,
