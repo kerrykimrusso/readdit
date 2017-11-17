@@ -47,7 +47,8 @@ export default class HomePage extends Component {
             id={post.id}
             timestamp={post.timestamp}
             title={post.title}
-            body={post.body} 
+            body={post.body}
+            bodyHidden
             author={post.author}
             voteScore={post.voteScore}
             category={post.category}

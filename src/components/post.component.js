@@ -9,6 +9,7 @@ const PostComponent = ({
   timestamp,
   title, 
   body, 
+  bodyHidden,
   author,
   voteScore,
   category,
@@ -45,13 +46,20 @@ const PostComponent = ({
       <Item.Meta>
         <span>Submitted {distanceInWordsToNow(timestamp, {includeSeconds: true})} ago by {author} to <Link to={`/${category}`}>{category}</Link></span>
       </Item.Meta>
-      {!commentsHidden && <Item.Extra>
-        <Link to={`/post/${id}`}>
-          <Label>
-            <Icon fitted name='comment'/>{numComments}
-          </Label>
-        </Link>
-      </Item.Extra>}
+      {!bodyHidden && 
+        <Item.Description>
+          {body}
+        </Item.Description>
+      }
+      {!commentsHidden && 
+        <Item.Extra>
+          <Link to={`/post/${id}`}>
+            <Label>
+              <Icon fitted name='comment'/>{numComments}
+            </Label>
+          </Link>
+        </Item.Extra>
+      }
     </Item.Content>
   </Item>
 
@@ -75,6 +83,7 @@ PostComponent.propTypes = {
 PostComponent.defaultProps = {
   numComments: 0,
   commentsHidden: false,
+  bodyHidden: false,
 }
 
 export default PostComponent;
