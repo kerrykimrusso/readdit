@@ -22,26 +22,27 @@ export default class HomePage extends Component {
         deleted: PropTypes.bool.isRequired,
         numComments: PropTypes.number,
       })).isRequired,
-    sortMethods: PropTypes.array,
+    sortOptions: PropTypes.array,
     onPostUpvote: PropTypes.func.isRequired,
     onPostDownvote: PropTypes.func.isRequired,
+    onSortChange: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     categories: [],
     posts: [],
-    sortMethods: [
+    sortOptions: [
       {
         key: 'votes',
         text: 'Votes',
-        value: 'votes',
-        content: 'Votes',
+        value: 'voteScore',
+        content: 'Votes (Highest)',
       },
       {
         key: 'date',
         text: 'Date',
-        value: 'date',
-        content: 'Date',
+        value: 'timestamp',
+        content: 'Date (Newest)',
       },
     ]
   }
@@ -50,14 +51,15 @@ export default class HomePage extends Component {
     const { 
       categories,
       posts,
-      sortMethods,
+      sortOptions,
       onPostUpvote,
       onPostDownvote,
+      onSortChange,
     } = this.props;
 
     return (
       <BasePage categories={categories}>
-        <Dropdown pretext='Sort By' options={sortMethods}/>
+        <Dropdown pretext='Sort By' options={sortOptions} onChange={onSortChange}/>
         <Item.Group>
         {posts.map(post => (
           <Post 
