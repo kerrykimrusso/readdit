@@ -15,7 +15,7 @@ const PostComponent = ({
   category,
   deleted,
   numComments,
-  commentsHidden,
+  isDetailView,
   onUpvote,
   onDownvote,
 }) => (
@@ -51,15 +51,22 @@ const PostComponent = ({
           {body}
         </Item.Description>
       }
-      {!commentsHidden && 
+      {!isDetailView && 
         <Item.Extra>
           <Link to={`/post/${id}`}>
             <Label>
               <Icon fitted name='comment'/>{numComments}
             </Label>
           </Link>
+          </Item.Extra>
+      }
+      {isDetailView && 
+        <Item.Extra>
+          <Label size='mini'>Edit</Label>
+          <Label size='mini'>Delete</Label>
         </Item.Extra>
       }
+      
     </Item.Content>
   </Item>
 
@@ -82,7 +89,7 @@ PostComponent.propTypes = {
 
 PostComponent.defaultProps = {
   numComments: 0,
-  commentsHidden: false,
+  isDetailView: false,
   bodyHidden: false,
 }
 
