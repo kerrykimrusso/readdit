@@ -55,6 +55,16 @@ export const state = {
       voteScore: -5,
       deleted: false,
       parentDeleted: false
-    }
+    },
+    {
+      id: '894tuq4ut84ut8v4t8wun89h',
+      parentId: "8tu4bsun805n8un48ve89",
+      timestamp: 1468166872634,
+      body: 'Hi there! I am a NESTED COMMENT.',
+      author: 'thingy',
+      voteScore: 6,
+      deleted: false,
+      parentDeleted: false
+    },
   ],
 };
