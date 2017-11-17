@@ -14,6 +14,7 @@ const CommentComponent = ({
   parentDeleted,
   onUpvote,
   onDownvote,
+  children,
 }) => (
   <Comment>
     <Comment.Avatar size='tiny'>
@@ -46,6 +47,7 @@ const CommentComponent = ({
         {body}
       </Comment.Text>
     </Comment.Content>
+    {children}
   </Comment>
 
 );

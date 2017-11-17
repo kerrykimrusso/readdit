@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Comment, Divider } from 'semantic-ui-react';
+import { Divider } from 'semantic-ui-react';
 import BasePage from './base.page';
 import Post from '../components/post.component';
-import CommentComp from '../components/comment.component';
+import CommentsGroup from '../components/commentsGroup.component';
 
 export default class PostPage extends Component {
   static propTypes = {
@@ -31,6 +31,7 @@ export default class PostPage extends Component {
         voteScore: PropTypes.number,
         deleted: PropTypes.bool,
         parentDeleted: PropTypes.bool,
+        children: PropTypes.array.isRequired,
       })).isRequired,
     onPostUpvote: PropTypes.func.isRequired,
     onPostDownvote: PropTypes.func.isRequired,
@@ -74,24 +75,7 @@ export default class PostPage extends Component {
         
         <Divider horizontal>Comments ({post.numComments})</Divider>
 
-        <Comment.Group>
-          {comments.map(comment => (
-            <CommentComp 
-              key={comment.id}
-              id={comment.id}
-              parentId={comment.parentId}
-              timestamp={comment.timestamp}
-              body={comment.body} 
-              author={comment.author}
-              voteScore={comment.voteScore}
-              deleted={comment.deleted}
-              parentDeleted={comment.parentDeleted}
-              numComments={comment.numComments}
-              onUpvote={onCommentUpvote}
-              onDownvote={onCommentDownvote}
-            />
-          ))}
-        </Comment.Group>
+        <CommentsGroup children={comments} onUpvote={onCommentUpvote} onDownvote={onCommentDownvote}/>
       </BasePage>
     )
   }

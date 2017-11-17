@@ -1,25 +1,26 @@
 import {connect} from 'react-redux';
 import PostPage from '../pages/post.page';
 import Actions from '../actions';
+import { unflatten } from 'un-flatten-tree';
 
 const mapStateToProps = (state, ownProps) => {
   const { categories, posts, comments } = state;
   const { id: postId } = ownProps.match.params;
   
-  const curPostComments = [];
-  comments.forEach((comment) => {
-    if(comment.parentId === postId) {
-      curPostComments.push(comment);
-    }
-  });
-
-  const curPost = posts.find(post => post.id === postId);
-  curPost.numComments = curPostComments.length;
+  const post = posts.find(post => post.id === postId);
+  const commentTree = unflatten(
+    comments, 
+    (node, parent) => node.parentId === parent.id,
+    (node, parent) => parent.children.push(node),
+    node => Object.assign({}, node, { children: [] }),
+  );
+  const postComments = commentTree.filter(comment => comment.parentId === postId);
+  post.numComments = postComments.length;
 
   return {
     categories,
-    post: curPost,
-    comments
+    post,
+    comments: postComments
   };
 };
 
