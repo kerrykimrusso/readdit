@@ -21,8 +21,18 @@ const postsReducer = (state = [], action) => {
     return Reactions.Post[action.type](state, action.payload);
 }
 
+const sortReducer = (state = '', action) => {
+    switch(action.type) {
+        case Actions.Sort.Types.CHANGE:
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     categories: categoriesReducer,
     comments: commentsReducer,
     posts: postsReducer,
+    sortBy: sortReducer,
 });
