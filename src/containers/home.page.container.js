@@ -21,6 +21,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     categories,
     posts: setNumCommentsForPosts(numCommentsPerPostId)(filteredPosts),
+    sortOptionSelected: sortBy || 'voteScore',
   };
 };
 
