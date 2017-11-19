@@ -1,14 +1,13 @@
 import * as PostActions from '../actions/post.actions';
 
 const postReactions = {
-  [PostActions.Types.CREATE]: (state, payload) => {
-    return [
-      ...state,
-      payload.post
-  ]},
+  [PostActions.Types.CREATE]: (state, post) => [
+    ...state,
+    post
+  ],
 
-  [PostActions.Types.UPDATE]: (state, payload) => {
-    const {id, body} = payload;
+  [PostActions.Types.UPDATE]: (state, post) => {
+    const {id, body} = post;
     if(!id && !body) throw new Error(`${PostActions.Types.UPDATE} reaction requires id and body to not be empty`);
 
     return state.map(
