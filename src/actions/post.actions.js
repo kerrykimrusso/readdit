@@ -7,7 +7,7 @@ export const Types = Object.freeze({
     CLICK_LINK: 'post/CLICK_LINK'
 });
 
-export const create = (id, title, body, author, category) => ({ 
+export const create = ({id, title, body, author, category}) => ({ 
     type: Types.CREATE,
     payload: {
         id,
@@ -18,7 +18,7 @@ export const create = (id, title, body, author, category) => ({
     }
 });
 
-export const update = (id, title, body) => ({ 
+export const update = ({id, title, body}) => ({ 
     type: Types.UPDATE,
     payload: {
         id,
