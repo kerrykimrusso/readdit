@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Button } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
+import PostFormContainer from '../containers/postForm.container';
 
 const Nav = ({
   categories,
@@ -25,9 +26,7 @@ const Nav = ({
       </Dropdown>
       <Menu.Menu position='right'>
         <Menu.Item>
-          <NavLink to={'/posts/new'}>
-            <Button content='New Post' labelPosition='left' icon='write' primary/>
-          </NavLink>
+          <PostFormContainer />
         </Menu.Item>
       </Menu.Menu>
     </Menu>
