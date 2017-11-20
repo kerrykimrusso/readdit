@@ -1,19 +1,19 @@
 import * as PostActions from '../actions/post.actions';
 
 const postReactions = {
-  [PostActions.Types.CREATE]: (state, post) => [
+  [PostActions.Types.CREATE]: (state, newPost) => [
     ...state,
-    post
+    newPost
   ],
 
-  [PostActions.Types.UPDATE]: (state, post) => {
-    const {id, body} = post;
-    if(!id && !body) throw new Error(`${PostActions.Types.UPDATE} reaction requires id and body to not be empty`);
+  [PostActions.Types.UPDATE]: (state, updatedPost) => {
+    const {id} = updatedPost;
+    if(!id) throw new Error(`${PostActions.Types.UPDATE} reaction requires id and body to not be empty`);
 
     return state.map(
       (post) => {
         if(id !== post.id) return post;
-        return Object.assign({body}, post);
+        return Object.assign({}, post, updatedPost);
       });
   },
 
