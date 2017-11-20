@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import PostFormContainer from '../containers/postForm.container';
 
-const Nav = ({
+const BasePage = ({
   categories,
   children,
 }) => (
@@ -36,11 +36,11 @@ const Nav = ({
   </div>
 );
 
-Nav.propTypes = {
+BasePage.propTypes = {
   categories: PropTypes.array.isRequired,
 };
 
-Nav.defaultProps = {
+BasePage.defaultProps = {
   categories: [],
 }
-export default Nav;
+export default BasePage;
