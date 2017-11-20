@@ -26,6 +26,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   onPostUpvote: (id) => dispatch(Actions.Post.upvote(id)),
   onPostDownvote: (id) => dispatch(Actions.Post.downvote(id)),
+  onPostEdit: (post) => dispatch(Actions.Post.update(post)),
+  onPostDelete: (id) => dispatch(Actions.Post.remove(id)),
   onCommentUpvote: (id) => dispatch(Actions.Comment.upvote(id)),
   onCommentDownvote: (id) => dispatch(Actions.Comment.downvote(id)),
 });

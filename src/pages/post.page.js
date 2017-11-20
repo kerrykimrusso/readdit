@@ -10,7 +10,7 @@ export default class PostPage extends Component {
     categories: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
         path: PropTypes.string.isRequired,
-      }),).isRequired,
+      })).isRequired,
     post: PropTypes.shape({
         id: PropTypes.string.isRequired, 
         timestamp: PropTypes.number.isRequired,
@@ -35,6 +35,8 @@ export default class PostPage extends Component {
       })).isRequired,
     onPostUpvote: PropTypes.func.isRequired,
     onPostDownvote: PropTypes.func.isRequired,
+    onPostEdit: PropTypes.func.isRequired,
+    onPostDelete: PropTypes.func.isRequired,
     onCommentUpvote: PropTypes.func.isRequired,
     onCommentDownvote: PropTypes.func.isRequired,
   }
@@ -51,6 +53,8 @@ export default class PostPage extends Component {
       comments, 
       onPostUpvote, 
       onPostDownvote,
+      onPostEdit,
+      onPostDelete,
       onCommentUpvote,
       onCommentDownvote,
     } = this.props;
@@ -67,10 +71,13 @@ export default class PostPage extends Component {
             author={post.author}
             voteScore={post.voteScore}
             category={post.category}
+            categories={categories}
             deleted={post.deleted}
             numComments={post.numComments}
             onUpvote={onPostUpvote}
             onDownvote={onPostDownvote}
+            onEdit={onPostEdit}
+            onDelete={onPostDelete}
             isDetailView
           />
         </Item.Group>
@@ -79,7 +86,7 @@ export default class PostPage extends Component {
 
         <Form reply>
           <Form.TextArea />
-          <Button content='Add Comment' labelPosition='left' icon='edit' primary />
+          <Button primary content='Add Comment' labelPosition='left' icon='edit'/>
         </Form>
 
         <CommentsGroup children={comments} onUpvote={onCommentUpvote} onDownvote={onCommentDownvote}/>
