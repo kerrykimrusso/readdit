@@ -1,6 +1,8 @@
 import * as R from 'ramda';
 import { distanceInWordsToNow, differenceInMonths, format } from 'date-fns';
 
+export const getPropValue = prop => x => R.view(R.lensProp(prop), x);
+
 export const filterByPropEqualTo = R.curry(
     (lens, value) => R.filter(
       x => R.view(lens, x) === value
@@ -15,6 +17,8 @@ export const countByProp = lens => R.pipe(
   R.map(R.view(lens)),
   R.countBy(R.identity),
 );
+
+export const filterDeleted = filterByPropEqualTo(R.lensProp('deleted'), false);
 
 export const filterByCategoryThenSortByVoteScore = propValue => R.pipe(
   filterByPropEqualTo(R.lensProp('category'))(propValue),

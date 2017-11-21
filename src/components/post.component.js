@@ -17,7 +17,7 @@ const PostComponent = ({
   categories,
   deleted,
   numComments,
-  isDetailView,
+  showNumComments,
   onUpvote,
   onDownvote,
   onEdit,
@@ -62,29 +62,25 @@ const PostComponent = ({
             {body}
           </Item.Description>
         }
-        {!isDetailView && 
-          <Item.Extra>
+        <Item.Extra>
+          {showNumComments && 
             <Link to={`/post/${id}`}>
-              <Button icon='comment' content={numComments}/>
+              <Button compact size='mini' icon='comment' content={numComments}/>
             </Link>
-            </Item.Extra>
-        }
-        {isDetailView && 
-          <Item.Extra>
-            <PostForm 
-              trigger={<Button compact size='mini' icon='write' content='Edit'/>}
-              header='Edit Post'
-              id={id}
-              title={title}
-              author={author}
-              body={body}
-              category={category}
-              categories={categoryDropdownOptions}
-              onSubmit={onEdit}
-            />
-            <Button compact size='mini' icon='delete' content='Delete'/>
-          </Item.Extra>
-        }
+          }
+          <PostForm 
+            trigger={<Button compact size='mini' icon='write' content='Edit'/>}
+            header='Edit Post'
+            id={id}
+            title={title}
+            author={author}
+            body={body}
+            category={category}
+            categories={categoryDropdownOptions}
+            onSubmit={onEdit}
+          />
+          <Button compact size='mini' icon='delete' content='Delete' onClick={() => onDelete(id)}/>
+        </Item.Extra>
         
       </Item.Content>
     </Item>
@@ -105,14 +101,14 @@ PostComponent.propTypes = {
   })).isRequired,
   deleted: PropTypes.bool.isRequired,
   numComments: PropTypes.number,
-  commentsHidden: PropTypes.bool,
+  showNumComments: PropTypes.bool,
   onUpvote: PropTypes.func.isRequired,
   onDownvote: PropTypes.func.isRequired,
 }
 
 PostComponent.defaultProps = {
   numComments: 0,
-  isDetailView: false,
+  showNumComments: true,
   bodyHidden: false,
 }
 

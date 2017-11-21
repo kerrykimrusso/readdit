@@ -57,7 +57,8 @@ class PostFormComponent extends Component {
     } = this.props;
 
     return (
-      <Modal dimmer='blurring' trigger={trigger}>
+      // <Modal dimmer='blurring' trigger={trigger}>
+      <Modal trigger={trigger}>
         <Modal.Header>
           {header}
         </Modal.Header>

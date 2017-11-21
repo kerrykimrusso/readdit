@@ -18,8 +18,9 @@ const postReactions = {
   },
 
   [PostActions.Types.REMOVE]: (state, id) => {
-    return state.filter((post) => {
-      return id !== post.id;
+    return state.map((post) => {
+      if(id !== post.id) return post;
+      return Object.assign({}, post, { deleted: true });
     });
   },
 

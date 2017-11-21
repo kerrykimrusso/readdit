@@ -30,6 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
   onPostDelete: (id) => dispatch(Actions.Post.remove(id)),
   onCommentUpvote: (id) => dispatch(Actions.Comment.upvote(id)),
   onCommentDownvote: (id) => dispatch(Actions.Comment.downvote(id)),
+  onNewPostSubmit: (post) => dispatch(Actions.Post.create(post)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostPage);

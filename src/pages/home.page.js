@@ -26,7 +26,10 @@ export default class HomePage extends Component {
     sortOptionSelected: PropTypes.string,
     onPostUpvote: PropTypes.func.isRequired,
     onPostDownvote: PropTypes.func.isRequired,
+    onPostEdit: PropTypes.func.isRequired,
+    onPostDelete: PropTypes.func.isRequired,
     onSortChange: PropTypes.func.isRequired,
+    onNewPostSubmit: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -56,13 +59,19 @@ export default class HomePage extends Component {
       sortOptionSelected,
       onPostUpvote,
       onPostDownvote,
+      onPostEdit,
+      onPostDelete,
       onSortChange,
+      onNewPostSubmit,
     } = this.props;
 
     const sortByDefaultIndex = sortOptions.findIndex(option => option.value === sortOptionSelected);
 
     return (
-      <BasePage categories={categories}>
+      <BasePage 
+        categories={categories} 
+        onNewPostSubmit={onNewPostSubmit}
+      >
         <Dropdown pretext='Sort By' options={sortOptions} defaultIndex={sortByDefaultIndex} onChange={onSortChange}/>
         <Item.Group>
         {posts.map(post => (
@@ -76,10 +85,13 @@ export default class HomePage extends Component {
             author={post.author}
             voteScore={post.voteScore}
             category={post.category}
+            categories={categories}
             deleted={post.deleted}
             numComments={post.numComments}
             onUpvote={onPostUpvote}
             onDownvote={onPostDownvote}
+            onEdit={onPostEdit}
+            onDelete={onPostDelete}
           />
         ))}
         </Item.Group>

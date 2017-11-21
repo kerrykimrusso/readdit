@@ -4,6 +4,7 @@ import { Form, Button, Item, Divider } from 'semantic-ui-react';
 import BasePage from './base.page';
 import Post from '../components/post.component';
 import CommentsGroup from '../components/commentsGroup.component';
+import { Redirect } from 'react-router-dom';
 
 export default class PostPage extends Component {
   static propTypes = {
@@ -39,6 +40,7 @@ export default class PostPage extends Component {
     onPostDelete: PropTypes.func.isRequired,
     onCommentUpvote: PropTypes.func.isRequired,
     onCommentDownvote: PropTypes.func.isRequired,
+    onNewPostSubmit: PropTypes.func.isRequired,
   }
 
   static defaultProps = { 
@@ -57,10 +59,17 @@ export default class PostPage extends Component {
       onPostDelete,
       onCommentUpvote,
       onCommentDownvote,
+      onNewPostSubmit,
     } = this.props;
 
+    if(post.deleted) return <Redirect to='/'/>;
+    
     return (
-      <BasePage categories={categories}>
+      <BasePage 
+        categories={categories} 
+        category={post.category}
+        onNewPostSubmit={onNewPostSubmit}
+      >
         <Item.Group>
           <Post 
             key={post.id}
