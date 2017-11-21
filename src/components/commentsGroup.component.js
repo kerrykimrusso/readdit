@@ -24,7 +24,13 @@ const CommentsGroupComponent = ({
       onUpvote={() => onUpvote(comment.id)}
       onDownvote={() => onDownvote(comment.id)}
     >
-      {comment.children.length > 0 && <CommentsGroupComponent children={comment.children} onUpvote={onUpvote} onDownvote={onDownvote}/>}
+      {comment.children.length > 0 && 
+        <CommentsGroupComponent 
+          children={comment.children} 
+          onUpvote={onUpvote} 
+          onDownvote={onDownvote}
+        />
+      }
     </Comment>
   ))}
   </SUIComment.Group>
