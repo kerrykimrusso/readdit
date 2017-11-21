@@ -1,5 +1,5 @@
-import Comment from './comment.reactions.js';
-import Post from './post.reactions.js';
+import Comment from './comment.reactions';
+import Post from './post.reactions';
 
 export default {
   Post,
