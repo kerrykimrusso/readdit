@@ -14,7 +14,7 @@ const CommentReactions = {
     return state.map(
       (comment) => {
         if(id !== comment.id) return comment;
-        return Object.assign({body}, comment);
+        return Object.assign({}, comment, {body});
       });
   },
 
@@ -24,10 +24,9 @@ const CommentReactions = {
     });
   },
 
-  [CommentActions.Types.UPVOTE]: (state, id) => {
-    return state.forEach((comment) => {
+  [CommentActions.Types.UPVOTE]: (comments, id) => {
+    return comments.map((comment) => {
       if(comment.id !== id) return comment;
-
       return Object.assign(
         {}, 
         comment, 
@@ -36,10 +35,9 @@ const CommentReactions = {
     });
   },
 
-  [CommentActions.Types.DOWNVOTE]: (state, id) => {
-    return state.forEach((comment) => {
+  [CommentActions.Types.DOWNVOTE]: (comments, id) => {
+    return comments.map((comment) => {
       if(comment.id !== id) return comment;
-
       return Object.assign(
         {}, 
         comment, 

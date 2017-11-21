@@ -32,14 +32,10 @@ export const remove = (id) => ({
 
 export const upvote = (id) => ({
     type: Types.UPVOTE,
-    payload: {
-        id,
-    }
+    payload: id
 });
 
 export const downvote = (id) => ({
     type: Types.DOWNVOTE,
-    payload: {
-        id,
-    }
+    payload: id
 });
